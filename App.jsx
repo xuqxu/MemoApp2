@@ -13,7 +13,7 @@ export default function App() {
       <StatusBar style="auto" />
       <AppBar />
       <MemoList />
-      <CircleButton />
+      <CircleButton>+</CircleButton>
     </View>
   );
 }
