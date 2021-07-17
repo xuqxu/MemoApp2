@@ -1,19 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { string, shape } from 'prop-types';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function CircleButton(props) {
-  const { children, style } = props;
+  const { style, name } = props;
   return (
     <View style={[styles.circleButton, style]}>
-      <Text style={styles.circleButtonLabel}>{children}</Text>
+      <MaterialCommunityIcons name={name} size={32} color="white" />
     </View>
   );
 }
 
 CircleButton.propTypes = {
-  children: string.isRequired,
   style: shape(),
+  name: string.isRequired,
 };
 
 CircleButton.defaultProps = {
