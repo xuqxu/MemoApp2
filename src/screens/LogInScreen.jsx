@@ -4,7 +4,7 @@ import {
   View, Text, TextInput, StyleSheet, TouchableOpacity,
 } from 'react-native';
 
-import AppBar from '../components/AppBar';
+// import AppBar from '../components/AppBar';
 import Button from '../components/Button';
 
 export default function LogInScreen() {
@@ -12,7 +12,7 @@ export default function LogInScreen() {
     <View style={styles.container}>
       {/* eslint-disable-next-line */}
       <StatusBar style="dark" />
-      <AppBar />
+      {/* <AppBar /> */}
       <View style={styles.inner}>
         <Text style={styles.title}>Log In</Text>
         <TextInput style={styles.input} value="Email Address" />

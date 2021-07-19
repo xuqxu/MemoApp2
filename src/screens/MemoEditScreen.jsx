@@ -3,14 +3,14 @@ import {
   View, TextInput, StyleSheet, Keyboard,
 } from 'react-native';
 
-import AppBar from '../components/AppBar';
+// import AppBar from '../components/AppBar';
 import CircleButton from '../components/CircleButton';
 import KeyboardSafeView from '../components/KeyboardSafeView';
 
 export default function MemoEditScreen() {
   return (
     <KeyboardSafeView style={styles.container} behavior="height">
-      <AppBar />
+      {/* <AppBar /> */}
       <View style={styles.inputContainer}>
         <TextInput value="Lorem ipsum" multiline style={styles.input} onSubmitEditing={Keyboard.dismiss} />
       </View>

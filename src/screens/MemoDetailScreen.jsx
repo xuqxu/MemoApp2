@@ -4,14 +4,14 @@ import {
   View, ScrollView, Text, StyleSheet,
 } from 'react-native';
 
-import AppBar from '../components/AppBar';
+// import AppBar from '../components/AppBar';
 import CircleButton from '../components/CircleButton';
 
 export default function MemoDetailScreen() {
   return (
     <View style={styles.container}>
       {/* AppBar */}
-      <AppBar />
+      {/* <AppBar /> */}
       {/* MemoHeader */}
       <View style={styles.memoHeader}>
         <Text style={styles.memoTitle}>Lorem ipsum</Text>
@@ -24,7 +24,7 @@ export default function MemoDetailScreen() {
         </Text>
       </ScrollView>
       {/* CircleButton */}
-      <CircleButton style={{ top: 160, bottom: 'auto' }} name="fountain-pen-tip" />
+      <CircleButton style={{ top: 60, bottom: 'auto' }} name="fountain-pen-tip" />
       {/* end */}
     </View>
   );

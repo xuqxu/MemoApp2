@@ -4,7 +4,7 @@ import {
   View, Text, TextInput, StyleSheet, TouchableOpacity,
 } from 'react-native';
 
-import AppBar from '../components/AppBar';
+// import AppBar from '../components/AppBar';
 import Button from '../components/Button';
 
 export default function SignUpScreen() {
@@ -12,7 +12,7 @@ export default function SignUpScreen() {
     <View style={styles.container}>
       {/* eslint-disable-next-line */}
       <StatusBar style="dark" />
-      <AppBar />
+      {/* <AppBar /> */}
       <View style={styles.inner}>
         <Text style={styles.title}>Sign Up</Text>
         <TextInput style={styles.input} value="Email Address" />
