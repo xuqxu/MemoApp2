@@ -7,7 +7,8 @@ import {
 // import AppBar from '../components/AppBar';
 import CircleButton from '../components/CircleButton';
 
-export default function MemoDetailScreen() {
+export default function MemoDetailScreen(props) {
+  const { navigation } = props;
   return (
     <View style={styles.container}>
       {/* AppBar */}
@@ -24,7 +25,11 @@ export default function MemoDetailScreen() {
         </Text>
       </ScrollView>
       {/* CircleButton */}
-      <CircleButton style={{ top: 60, bottom: 'auto' }} name="fountain-pen-tip" />
+      <CircleButton
+        style={{ top: 60, bottom: 'auto' }}
+        name="fountain-pen-tip"
+        onPress={() => { navigation.navigate('MemoEdit'); }}
+      />
       {/* end */}
     </View>
   );
