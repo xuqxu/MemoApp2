@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View, Text, TextInput, StyleSheet, TouchableOpacity,
 } from 'react-native';
@@ -9,6 +9,8 @@ import Button from '../components/Button';
 
 export default function SignUpScreen(props) {
   const { navigation } = props;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   return (
     <View style={styles.container}>
       {/* eslint-disable-next-line */}
@@ -16,8 +18,24 @@ export default function SignUpScreen(props) {
       {/* <AppBar /> */}
       <View style={styles.inner}>
         <Text style={styles.title}>Sign Up</Text>
-        <TextInput style={styles.input} value="Email Address" />
-        <TextInput style={styles.input} value="Password" />
+        <TextInput
+          style={styles.input}
+          value={email}
+          onChangeText={(text) => { setEmail(text); }}
+          autoCapitalize="none"
+          keyboardType="email-address"
+          placeholder="Email Address"
+          textContentType="emailAddress"
+        />
+        <TextInput
+          style={styles.input}
+          value={password}
+          onChangeText={(text) => { setPassword(text); }}
+          autoCapitalize="none"
+          placeholder="Password"
+          secureTextEntry
+          textContentType="password"
+        />
         <Button
           label="Submit"
           onPress={() => {
