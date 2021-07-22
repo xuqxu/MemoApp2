@@ -10,6 +10,8 @@ import MemoCreateScreen from './src/screens/MemoCreateScreen';
 import LogInScreen from './src/screens/LogInScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 
+import Icon from './src/components/Icon';
+
 import { firebaseConfig } from './env';
 
 const Stack = createStackNavigator();
@@ -24,9 +26,20 @@ export default function App() {
       <Stack.Navigator
         initialRouteName="LogIn"
         screenOptions={{
-          headerStyle: { backgroundColor: 'rgba(255, 255, 255, 0.92)' },
+          headerStyle: {
+            backgroundColor: 'rgba(255, 255, 255, 0.92)',
+            /* shadow */
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 1,
+            },
+            shadowOpacity: 0.15,
+            shadowRadius: 3,
+            elevation: 1,
+          },
           headerTitleStyle: { color: '#848484' },
-          headerTitle: 'φ',
+          headerTitle: () => <Icon name="phai" size={32} color="#848484" />,
           headerTintColor: '#848484',
           headerBackTitle: ' ',
           cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
