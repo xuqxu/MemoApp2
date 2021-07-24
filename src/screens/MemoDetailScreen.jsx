@@ -1,27 +1,53 @@
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { shape, string } from 'prop-types';
 import {
   View, ScrollView, Text, StyleSheet,
 } from 'react-native';
-
+import firebase from 'firebase';
 // import AppBar from '../components/AppBar';
 import CircleButton from '../components/CircleButton';
+import { dateToString } from '../utils';
 
 export default function MemoDetailScreen(props) {
-  const { navigation } = props;
+  const { navigation, route } = props;
+  const { id } = route.params;
+  // eslint-disable-next-line no-console
+  console.log(id);
+  const [memo, setMemo] = useState(null);
+
+  useEffect(() => {
+    const { currentUser } = firebase.auth();
+    let unsubscribe = () => { };
+    if (currentUser) {
+      const db = firebase.firestore();
+      const ref = db.collection(`users/${currentUser.uid}/memos`).doc(id);
+      unsubscribe = ref.onSnapshot((doc) => {
+        // eslint-disable-next-line no-console
+        console.log(doc.id, doc.data());
+        const data = doc.data();
+        setMemo({
+          id: doc.id,
+          bodyText: data.bodyText,
+          updatedAt: data.updatedAt.toDate(),
+        });
+      });
+    }
+    return unsubscribe;
+  }, []);
   return (
     <View style={styles.container}>
       {/* AppBar */}
       {/* <AppBar /> */}
       {/* MemoHeader */}
       <View style={styles.memoHeader}>
-        <Text style={styles.memoTitle}>Lorem ipsum</Text>
-        <Text style={styles.memoDate}>2021/1/1 0:00</Text>
+        <Text style={styles.memoTitle} numberOfLines={1}>{memo && memo.bodyText}</Text>
+        <Text style={styles.memoDate}>{memo && dateToString(memo.updatedAt)}</Text>
       </View>
       {/* MemoListDetail */}
       <ScrollView style={styles.memoBody}>
         <Text style={styles.memoText}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          {memo && memo.bodyText}
         </Text>
       </ScrollView>
       {/* CircleButton */}
@@ -35,6 +61,11 @@ export default function MemoDetailScreen(props) {
   );
 }
 
+MemoDetailScreen.propTypes = {
+  route: shape({
+    params: shape({ id: string }),
+  }).isRequired,
+};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
