@@ -4,29 +4,44 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import {
+  shape, string, instanceOf, arrayOf,
+} from 'prop-types';
 
-export default function MemoList() {
+export default function MemoList(props) {
+  const { memos } = props;
   const navigation = useNavigation();
   return (
     <View>
-      <TouchableOpacity
-        style={styles.memoListItem}
-        onPress={() => { navigation.navigate('MemoDetail'); }}
-      >
-        <View style={styles.memoListItemInner}>
-          <Text style={styles.memoListItemTitle}>Lorem ipsum</Text>
-          <Text style={styles.memoListItemDate}>2021/1/1 0:00</Text>
-        </View>
+      {memos.map((memo) => (
         <TouchableOpacity
-          style={styles.memoDelete}
-          onPress={() => { Alert.alert('Are you sure?'); }}
+          key={memo.id}
+          style={styles.memoListItem}
+          onPress={() => { navigation.navigate('MemoDetail'); }}
         >
-          <Feather name="x" size={16} />
+          <View style={styles.memoListItemInner}>
+            <Text style={styles.memoListItemTitle}>{memo.bodyText}</Text>
+            <Text style={styles.memoListItemDate}>{String(memo.updatedAt)}</Text>
+          </View>
+          <TouchableOpacity
+            style={styles.memoDelete}
+            onPress={() => { Alert.alert('Are you sure?'); }}
+          >
+            <Feather name="x" size={16} />
+          </TouchableOpacity>
         </TouchableOpacity>
-      </TouchableOpacity>
+      ))}
     </View>
   );
 }
+
+MemoList.propTypes = {
+  memos: arrayOf(shape({
+    id: string,
+    bodyText: string,
+    updatedAt: instanceOf(Date),
+  })).isRequired,
+};
 
 const styles = StyleSheet.create({
   memoListItem: {
