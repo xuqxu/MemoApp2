@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import {
-  View, TextInput, StyleSheet,
+  View, TextInput, StyleSheet, Alert,
 } from 'react-native';
 
 import firebase from 'firebase';
 
-// import AppBar from '../components/AppBar';
 import CircleButton from '../components/CircleButton';
 import KeyboardSafeView from '../components/KeyboardSafeView';
+import { translateErrors } from '../utils';
 
 export default function MemoCreateScreen(props) {
   const { navigation } = props;
@@ -21,20 +21,17 @@ export default function MemoCreateScreen(props) {
       bodyText,
       updatedAt: new Date(),
     })
-      .then((docRef) => {
-        // eslint-disable-next-line no-console
-        console.log('Created!', docRef.id);
+      .then(() => {
         navigation.goBack();
       })
       .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log('Error!', error);
+        const errorMsg = translateErrors(error.code);
+        Alert.alert(errorMsg.title, errorMsg.description);
       });
   }
 
   return (
     <KeyboardSafeView style={styles.container} behavior="height">
-      {/* <AppBar /> */}
       <View style={styles.inputContainer}>
         <TextInput
           value={bodyText}

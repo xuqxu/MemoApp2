@@ -5,7 +5,6 @@ import {
 import { shape, string } from 'prop-types';
 import firebase from 'firebase';
 
-// import AppBar from '../components/AppBar';
 import CircleButton from '../components/CircleButton';
 import KeyboardSafeView from '../components/KeyboardSafeView';
 import { translateErrors } from '../utils';
@@ -36,7 +35,6 @@ export default function MemoEditScreen(props) {
 
   return (
     <KeyboardSafeView style={styles.container} behavior="height">
-      {/* <AppBar /> */}
       <View style={styles.inputContainer}>
         <TextInput
           value={body}

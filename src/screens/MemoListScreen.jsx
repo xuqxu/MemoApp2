@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 
-// import AppBar from '../components/AppBar';
 import MemoList from '../components/MemoList';
 import CircleButton from '../components/CircleButton';
 import LogOutButton from '../components/LogOutButton';
@@ -32,8 +31,6 @@ export default function MemoListScreen(props) {
       unsubscribe = ref.onSnapshot((snapshot) => {
         const userMemos = [];
         snapshot.forEach((doc) => {
-          // eslint-disable-next-line no-console
-          console.log(doc.id, doc.data());
           const data = doc.data();
           userMemos.push({
             id: doc.id,
@@ -43,9 +40,7 @@ export default function MemoListScreen(props) {
         });
         setMemos(userMemos);
         setLoading(false);
-      }, (error) => {
-        // eslint-disable-next-line no-console
-        console.log(error);
+      }, () => {
         setLoading(false);
         Alert.alert('データの読み込みに失敗しました。');
       });
@@ -59,10 +54,9 @@ export default function MemoListScreen(props) {
         {/* eslint-disable-next-line */}
         <StatusBar style="auto" />
         <Loading isLoading={isLoading} />
-        <View style={emptyStyles.inner}>
+        <View>
           <Text style={emptyStyles.title}>最初のメモを作成しましょう。</Text>
           <Button
-            style={emptyStyles.button}
             label="作成する"
             onPress={() => { navigation.navigate('MemoCreate'); }}
           />
@@ -75,7 +69,6 @@ export default function MemoListScreen(props) {
     <View style={styles.container}>
       {/* eslint-disable-next-line */}
       <StatusBar style="auto" />
-      {/* <AppBar /> */}
       <MemoList memos={memos} />
       <CircleButton
         name="plus"
@@ -98,15 +91,8 @@ const emptyStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  inner: {
-    // justifyContent: 'center',
-    // alignItems: 'center',
-  },
   title: {
     fontSize: 18,
     marginBottom: 24,
-  },
-  button: {
-    // alignSelf: 'center',
   },
 });

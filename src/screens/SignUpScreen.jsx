@@ -5,7 +5,6 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 
-// import AppBar from '../components/AppBar';
 import Button from '../components/Button';
 import Loading from '../components/Loading';
 import { translateErrors } from '../utils';
@@ -19,18 +18,13 @@ export default function SignUpScreen(props) {
   function handlePress() {
     setLoading(true);
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const { user } = userCredential;
-        // eslint-disable-next-line no-console
-        console.log(user.uid);
+      .then(() => {
         navigation.reset({
           index: 0,
           routes: [{ name: 'MemoList' }],
         });
       })
       .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.log(error.code, error.message);
         const errorMsg = translateErrors(error.code);
         Alert.alert(errorMsg.title, errorMsg.description);
       })
@@ -42,7 +36,6 @@ export default function SignUpScreen(props) {
     <View style={styles.container}>
       {/* eslint-disable-next-line */}
       <StatusBar style="dark" />
-      {/* <AppBar /> */}
       <Loading isLoading={isLoading} />
       <View style={styles.inner}>
         <Text style={styles.title}>Sign Up</Text>
