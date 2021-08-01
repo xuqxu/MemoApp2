@@ -4,6 +4,7 @@ import { shape, string } from 'prop-types';
 import {
   View, ScrollView, Text, StyleSheet,
 } from 'react-native';
+import Markdown from 'react-native-markdown-display';
 import firebase from 'firebase';
 import CircleButton from '../components/CircleButton';
 import { dateToString } from '../utils';
@@ -39,7 +40,13 @@ export default function MemoDetailScreen(props) {
       <ScrollView>
         <View style={styles.memoBodyInner}>
           <Text style={styles.memoText}>
-            {memo && memo.bodyText}
+            <Markdown
+              style={{
+                body: { color: '#6c7686' },
+              }}
+            >
+              {String(memo && memo.bodyText)}
+            </Markdown>
           </Text>
         </View>
       </ScrollView>
@@ -68,7 +75,7 @@ const styles = StyleSheet.create({
     height: 96,
     justifyContent: 'center',
     paddingVertical: 24,
-    paddingHorizontal: 19,
+    paddingHorizontal: 16,
 
     /* shadow */
     shadowColor: '#000',
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
   memoBodyInner: {
     paddingTop: 32,
     paddingBottom: 80,
-    paddingHorizontal: 27,
+    paddingHorizontal: 16,
   },
   memoText: {
     color: '#6c7686',
