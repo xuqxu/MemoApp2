@@ -71,6 +71,6 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     paddingTop: 32,
     paddingBottom: 32,
-    paddingHorizontal: 27,
+    paddingHorizontal: 16,
   },
 });
